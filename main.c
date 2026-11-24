@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 
@@ -13,13 +14,14 @@ int main(){
 
     struct Produto produtos[100];
     int total = 0;
-
+    system("clear");
     printf("==========================\n");
     printf("  CADASTRO DE PRODUTOS\n");
     printf("==========================\n\n");
     
     int opcao;
     do{
+        system("clear");
         printf("1- Cadastrar produto\n");
         printf("2- Listar produto\n");
         printf("3- Buscar produto\n");
@@ -32,10 +34,13 @@ int main(){
         while(getchar()!='\n');
 }        
         printf("\n");
-    
         switch (opcao){
+
             case 1:
-            printf("\nCadastrar produto\n");
+            system("clear");
+            printf("================================\n");
+            printf("        Cadastrar produto       \n");
+            printf("================================\n");
             if (total >= 100){
                 printf("Capacidade maxima!");}
             else{
@@ -132,29 +137,53 @@ int main(){
                     printf("A quantidade n~ao pode ser negativa!\n");}
             }
         } while (leitura_qtd != 1 || entrada_invalida_qtd == 1 || produtos[total].quantidade < 0);
-        printf("================================");
-        printf("Produto cadastrado com sucesso!");
-        printf("================================");
+printf("================================\n");
+printf("Produto cadastrado com sucesso!\n");
+printf("================================\n\n");
 
-            total++;
-            }
-        
+total++;
 
-            break;
-            
+printf("Pressione ENTER para voltar ao menu");
+getchar();
+}
+break;            
             case 2:
-            printf("\nListar produto\n");break;
+            system("clear");
+            printf("\nListar produtos\n");
+            if (total == 0) {
+                printf("Nenhum produto cadastrado!\n");
+            } else {
+                    printf("===============================\n");
+                    printf("       Lista de produtos       \n");
+                    printf("===============================\n");
+                for (int i = 0; i < total; i++){
+                    printf("ID: %d\n", produtos[i].id_produto);
+                    printf("Nome: %s\n", produtos[i].nome);
+                    printf("Preco: R$ %.2f\n", produtos[i].preco);
+                    printf("Quantidade: %d\n", produtos[i].quantidade);
+                    printf("------------------------------------------------------------------\n");
+                }
+                printf("Total de produtos: %d\n", total);
+            }   
+            printf("\nPressione ENTER para voltar ao menu");
+            getchar();
+            getchar();
+            break;
 
             case 3:
+            system("clear");
             printf("\nBuscar produto\n");break;
 
             case 4:
+            system("clear");
             printf("\nAtualizar produto\n");break;
 
             case 5:
+            system("clear");
             printf("\nRemover produto\n"); break;
 
             case 6:
+            system("clear");
             printf("Sair\n\n");
             printf("==========================\n");
             printf("    Finalizando APP       \n");
