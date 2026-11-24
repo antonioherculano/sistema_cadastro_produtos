@@ -6,11 +6,11 @@
 
 int main(){
     struct Produto {
-     int id_produto;
-    char nome[50];
-    float preco;
-    int quantidade;
-};
+        int id_produto;
+        char nome[50];
+        float preco;
+        int quantidade;
+    };
 
     struct Produto produtos[100];
     int total = 0;
@@ -29,10 +29,25 @@ int main(){
         printf("5- Remover produto\n");
         printf("6- Sair\n");
         printf("Escolha uma opcao: \n");
-        if (scanf("%i", &opcao) != 1) {
+        int leitura_menu;
+        int entrada_invalida_menu = 0;
+        int caractere_menu;
+
+        leitura_menu = scanf("%d", &opcao);
+
+        if (leitura_menu == EOF) {
+            break;
+        }
+
+        while ((caractere_menu = getchar()) != '\n' && caractere_menu != EOF) {
+            if (caractere_menu != ' ') {
+                entrada_invalida_menu = 1;
+            }
+        }
+
+        if (leitura_menu != 1 || entrada_invalida_menu == 1) {
             opcao = 7;
-            while(getchar()!='\n');
-        }        
+        } 
         printf("\n");
         switch (opcao){
 
@@ -168,7 +183,6 @@ int main(){
                 }   
                 printf("\nPressione ENTER para voltar ao menu");
                 getchar();
-                getchar();
                 break;
             }
 
@@ -186,7 +200,6 @@ int main(){
 
                 if (total == 0) {
                     printf("Nenhum produto cadastrado!\n");
-                    while ((caractere = getchar()) != '\n' && caractere != EOF) {}
                 } else {
                     do{
                         entrada_invalida_busca = 0;
@@ -243,8 +256,6 @@ int main(){
 
                 if (total == 0) {
                     printf("Nenhum produto cadastrado!\n");
-
-                while ((caractere = getchar()) != '\n' && caractere != EOF) {}
 
                 } else {
                     do {
@@ -358,10 +369,73 @@ int main(){
                 getchar();
                 break;
             }
-            case 5:
-            system("clear");
-            printf("\nRemover produto\n"); break;
+            case 5: {
+                system("clear");
+                printf("==================================\n"); 
+                printf("         Remover produto          \n"); 
+                printf("==================================\n");
+                int id_remover;
+                int encontrado = 0;
+                int posicao = -1;
+                int leitura;
+                int entrada_invalida;
+                int caractere;
+                if(total == 0) {
+                    printf("Nenhum produto cadastrado!\n");
 
+                } else {
+                    do {
+                        entrada_invalida = 0;
+
+                        printf("Digite o ID do produto: ");
+                        leitura = scanf("%d", &id_remover);
+                        while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                            if (caractere != ' ') {
+                                entrada_invalida = 1;
+                            }
+                        }
+
+                        if (leitura != 1 || entrada_invalida == 1) {
+                            printf("Erro! O ID precisa ser inteiro!\n");
+                        } else {
+                            if (id_remover <= 0) {
+                                printf("Erro! O ID precisa ser positivo!\n");
+                            }
+                        }
+                    } while (leitura != 1 || entrada_invalida == 1 || id_remover <=0);
+
+                    for (int i = 0; i < total; i++) {
+                        if (produtos[i].id_produto == id_remover) {
+                            encontrado = 1;
+                            posicao = i;
+                            break;
+                        }   
+                    }
+                    if (encontrado == 0) {
+                        printf("Produto nao encontrado!\n");
+                    } else {
+                        printf("\nProduto encontrado!\n");
+                        printf("ID: %d\n", produtos[posicao].id_produto);
+                        printf("Nome: %s\n", produtos[posicao].nome);
+                        printf("Preco: R$ %.2f\n", produtos[posicao].preco);
+                        printf("Quantidade: %d\n", produtos[posicao].quantidade);
+
+                        for (int i = posicao; i < total -1; i++){
+                            produtos[i] = produtos[i + 1];
+                        }
+                        total --;
+
+                        printf("================================\n");
+                        printf("  Produto removido com sucesso!\n");
+                        printf("================================\n");
+
+                    }
+                    
+                }
+                printf("\nPressione ENTER para voltar ao menu");
+                getchar();
+                break;
+            }   
             case 6:
             system("clear");
             printf("Sair\n\n");
@@ -370,8 +444,10 @@ int main(){
             printf("==========================\n");break;
             
             default:
-            printf("Opcao invalida! Selecione uma opcao disponivel!\n");
-        }
+                printf("Opcao invalida! Selecione uma opcao disponivel!\n");
+                printf("\nPressione ENTER para voltar ao menu");
+                getchar();
+                break;        }
     } while(opcao != 6);
 
     return 0;
