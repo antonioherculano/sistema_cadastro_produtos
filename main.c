@@ -87,20 +87,28 @@ int main(){
             } while(produtos[total].nome[0] == '\n' || produtos[total].nome[0] == ' ');
             
         int leitura_preco;
+        int entrada_invalida_preco;
         do{
+            entrada_invalida_preco = 0;
             printf("Digite o valor unitario: ");
 
             leitura_preco = scanf("%f", &produtos[total].preco);
 
-            while(getchar()!='\n');
+            int caractere;
+            while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                if (caractere != ' ') {
+                    entrada_invalida_preco = 1;
+                }
+}
 
-            if(leitura_preco != 1){
-                printf("O valor precisa ser do tipo decimal!\n");
+            if (leitura_preco != 1 || entrada_invalida_preco == 1) {
+                printf("O valor precisa ser numerico!\n");
             } else {
                 if(produtos[total].preco <= 0){
                     printf("O valor precisa ser positivo!\n");}}
 
-        }while(leitura_preco != 1 || produtos[total].preco <=0);
+        } while (leitura_preco != 1 || entrada_invalida_preco == 1 || produtos[total].preco <= 0);
+        
         int leitura_qtd;
         int entrada_invalida_qtd;
         do{
