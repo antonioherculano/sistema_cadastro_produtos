@@ -44,109 +44,108 @@ int main(){
             if (total >= 100){
                 printf("Capacidade maxima!");}
             else{
-            int duplicado;
-            int leitura;
+                int duplicado;
+                int leitura;
 
-            do{
-                duplicado = 0;
-                int entrada_invalida;
                 do{
-                entrada_invalida = 0;
+                    duplicado = 0;
+                    int entrada_invalida;
+                    do{
+                    entrada_invalida = 0;
 
-                printf("Digite o ID: ");
-                leitura = scanf("%d", &produtos[total].id_produto);
-                int caractere;
-                while ((caractere = getchar()) != '\n' && caractere != EOF) {
-                    if (caractere != ' ') {
-                        entrada_invalida = 1;
-                }
-}
-
-                if (leitura != 1 || entrada_invalida == 1) {
-                    printf("Erro! o ID precisa ser inteiro!\n");
-                } else {
-                    if(produtos[total].id_produto <= 0) {
-                    printf("Erro! o ID deve ser positivo\n");}
-                } 
-                } while (leitura != 1 || entrada_invalida == 1 || produtos[total].id_produto <= 0);
-
-                
-                for (int i = 0; i < total; i++){
-                    if(produtos[i].id_produto == produtos[total].id_produto) {
-                        duplicado = 1;
-                        break;
+                    printf("Digite o ID: ");
+                    leitura = scanf("%d", &produtos[total].id_produto);
+                    int caractere;
+                    while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                        if (caractere != ' ') {
+                            entrada_invalida = 1;
                     }
-                }
-                if (duplicado == 1) {
-                    printf("Erro: Este Id já está cadastrado! Tente novamente!\n");
-                }
+                    }
+
+                    if (leitura != 1 || entrada_invalida == 1) {
+                        printf("Erro! o ID precisa ser inteiro!\n");
+                    } else {
+                        if(produtos[total].id_produto <= 0) {
+                        printf("Erro! o ID deve ser positivo\n");}
+                    } 
+                    } while (leitura != 1 || entrada_invalida == 1 || produtos[total].id_produto <= 0);
+
+                    
+                    for (int i = 0; i < total; i++){
+                        if(produtos[i].id_produto == produtos[total].id_produto) {
+                            duplicado = 1;
+                            break;
+                        }
+                    }
+                    if (duplicado == 1) {
+                        printf("Erro: Este Id já está cadastrado! Tente novamente!\n");
+                    }
                 } while(duplicado == 1);
 
+                do{
+                printf("Digite o nome: ");
 
-            do{
-            printf("Digite o nome: ");
+                fgets(produtos[total].nome, sizeof(produtos[total].nome),stdin);
+                produtos[total].nome[strcspn(produtos[total].nome, "\n")] = '\0';
 
-            fgets(produtos[total].nome, sizeof(produtos[total].nome),stdin);
-            produtos[total].nome[strcspn(produtos[total].nome, "\n")] = '\0';
-
-            if (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ') {
-                printf("Erro! O nome não pode estar vazio!\n");
-            }
-
-            } while (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ');            
-        
-        int leitura_preco;
-        int entrada_invalida_preco;
-        do{
-            entrada_invalida_preco = 0;
-            printf("Digite o valor unitario: ");
-
-            leitura_preco = scanf("%f", &produtos[total].preco);
-
-            int caractere;
-            while ((caractere = getchar()) != '\n' && caractere != EOF) {
-                if (caractere != ' ') {
-                    entrada_invalida_preco = 1;
+                if (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ') {
+                    printf("Erro! O nome não pode estar vazio!\n");
                 }
-}
 
-            if (leitura_preco != 1 || entrada_invalida_preco == 1) {
-                printf("O valor precisa ser numerico!\n");
-            } else {
-                if(produtos[total].preco <= 0){
-                    printf("O valor precisa ser positivo!\n");}}
+                } while (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ');            
+            
+                int leitura_preco;
+                int entrada_invalida_preco;
+                    do{
+                        entrada_invalida_preco = 0;
+                        printf("Digite o valor unitario: ");
 
-        } while (leitura_preco != 1 || entrada_invalida_preco == 1 || produtos[total].preco <= 0);
-        
-        int leitura_qtd;
-        int entrada_invalida_qtd;
-        do{
-            entrada_invalida_qtd = 0;
-            printf("Digite a quantidade: ");
-            leitura_qtd = scanf("%d", &produtos[total].quantidade);
-            int caractere;
-            while ((caractere = getchar()) != '\n' && caractere != EOF) {
-                if (caractere != ' ') {
-                    entrada_invalida_qtd = 1;
-                }
-}
-            if (leitura_qtd != 1 || entrada_invalida_qtd == 1) {
-                printf("A quantidade precisa ser do tipo inteiro!\n");
-            }else {
-                if(produtos[total].quantidade < 0){
-                    printf("A quantidade n~ao pode ser negativa!\n");}
-            }
-        } while (leitura_qtd != 1 || entrada_invalida_qtd == 1 || produtos[total].quantidade < 0);
-printf("================================\n");
-printf("Produto cadastrado com sucesso!\n");
-printf("================================\n\n");
+                        leitura_preco = scanf("%f", &produtos[total].preco);
 
-total++;
+                        int caractere;
+                        while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                            if (caractere != ' ') {
+                            entrada_invalida_preco = 1;
+                            }
+                        }
 
-printf("Pressione ENTER para voltar ao menu");
-getchar();
-}
-break;            
+                        if (leitura_preco != 1 || entrada_invalida_preco == 1) {
+                            printf("O valor precisa ser numerico!\n");
+                        } else {
+                                if(produtos[total].preco <= 0){
+                                    printf("O valor precisa ser positivo!\n");}}
+
+                        } while (leitura_preco != 1 || entrada_invalida_preco == 1 || produtos[total].preco <= 0);
+            
+                int leitura_qtd;
+                int entrada_invalida_qtd;
+                do{
+                    entrada_invalida_qtd = 0;
+                    printf("Digite a quantidade: ");
+                    leitura_qtd = scanf("%d", &produtos[total].quantidade);
+                    int caractere;
+                    while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                        if (caractere != ' ') {
+                        entrada_invalida_qtd = 1;
+                        }
+                    }
+                    if (leitura_qtd != 1 || entrada_invalida_qtd == 1) {
+                        printf("A quantidade precisa ser do tipo inteiro!\n");
+                    }else {
+                        if(produtos[total].quantidade < 0){
+                        printf("A quantidade n~ao pode ser negativa!\n");}
+                    }
+                } while (leitura_qtd != 1 || entrada_invalida_qtd == 1 || produtos[total].quantidade < 0);
+                printf("================================\n");
+                printf("Produto cadastrado com sucesso!\n");
+                printf("================================\n\n");
+
+                total++;
+                printf("Pressione ENTER para voltar ao menu");
+                getchar();
+                }   
+            break;
+
             case 2:
             system("clear");
             printf("\nListar produtos\n");
@@ -156,15 +155,16 @@ break;
                     printf("===============================\n");
                     printf("       Lista de produtos       \n");
                     printf("===============================\n");
-                for (int i = 0; i < total; i++){
-                    printf("ID: %d\n", produtos[i].id_produto);
-                    printf("Nome: %s\n", produtos[i].nome);
-                    printf("Preco: R$ %.2f\n", produtos[i].preco);
-                    printf("Quantidade: %d\n", produtos[i].quantidade);
-                    printf("------------------------------------------------------------------\n");
-                }
-                printf("Total de produtos: %d\n", total);
-            }   
+
+                    for (int i = 0; i < total; i++){
+                        printf("ID: %d\n", produtos[i].id_produto);
+                        printf("Nome: %s\n", produtos[i].nome);
+                        printf("Preco: R$ %.2f\n", produtos[i].preco);
+                        printf("Quantidade: %d\n", produtos[i].quantidade);
+                        printf("------------------------------------------------------------------\n");
+                    }
+                    printf("Total de produtos: %d\n", total);
+                    }   
             printf("\nPressione ENTER para voltar ao menu");
             getchar();
             getchar();
@@ -172,7 +172,52 @@ break;
 
             case 3:
             system("clear");
-            printf("\nBuscar produto\n");break;
+            printf("===============================\n");
+            printf("         Buscar produto        \n");
+            printf("===============================\n");
+            
+            int id_busca;
+            int encontrado = 0;
+            int leitura_busca;
+            int entrada_invalida_busca;
+            int caractere;
+
+            if (total == 0) {
+                printf("Nenhum produto cadastrado!\n");
+                while ((caractere = getchar()) != '\n' && caractere != EOF) {}
+            } else {
+                    do{
+                        printf("Digite o ID do produto: ");
+                        leitura_busca = scanf("%d", &id_busca);
+                        while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                            if (caractere != ' ') {
+                            entrada_invalida_busca = 1;
+                            }
+                        }
+                        if (leitura_busca != 1 || entrada_invalida_busca == 1) {
+                            printf("Erro! O ID precisa ser inteiro!\n");
+                        } else {
+                                if (id_busca <= 0) {
+                                printf("Erro! O ID precisa ser positivo!\n");
+                                }
+                            }
+                    }
+                    for (int i = 0; i < total; i++) {
+                        if (produtos[i].id_produto == id_busca) {
+                            encontrado = 1;
+                            printf("\nProduto encontrado!\n");
+                            printf("ID: %d\n", produtos[i].id_produto);
+                            printf("Nome: %s\n", produtos[i].nome);
+                            printf("Preco: R$ %.2f\n", produtos[i].preco);
+                            printf("Quantidade: %d\n", produtos[i].quantidade);
+                            break;}
+                    }
+                    if (encontrado == 0) {
+                        printf("Produto nao encontrado!\n");
+                    }
+
+            }   
+            break;
 
             case 4:
             system("clear");
