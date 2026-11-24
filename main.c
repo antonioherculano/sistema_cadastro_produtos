@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 
 int main(){
@@ -28,8 +27,7 @@ int main(){
         printf("Escolha uma opcao: \n");
         if (scanf("%i", &opcao) != 1) {
         opcao = 7;
-        int caractere;
-        while ((caractere = getchar()) != '\n' && caractere != EOF) {};
+        while(getchar()!='\n');
 }        
         printf("\n");
     
@@ -41,22 +39,29 @@ int main(){
             else{
             int duplicado;
             int leitura;
+
             do{
                 duplicado = 0;
+                int entrada_invalida;
                 do{
-                
-                printf("Digite o ID: ");
-                leitura = scanf("%i", &produtos[total].id_produto);
-                int caractere;
-                while ((caractere = getchar()) != '\n' && caractere != EOF) {};
+                entrada_invalida = 0;
 
-                if (leitura != 1) {
+                printf("Digite o ID: ");
+                leitura = scanf("%d", &produtos[total].id_produto);
+                int caractere;
+                while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                    if (caractere != ' ') {
+                        entrada_invalida = 1;
+                }
+}
+
+                if (leitura != 1 || entrada_invalida == 1) {
                     printf("Erro! o ID precisa ser inteiro!\n");
                 } else {
                     if(produtos[total].id_produto <= 0) {
                     printf("Erro! o ID deve ser positivo\n");}
                 } 
-                } while(leitura != 1 || produtos[total].id_produto <= 0);
+                } while (leitura != 1 || entrada_invalida == 1 || produtos[total].id_produto <= 0);
 
                 
                 for (int i = 0; i < total; i++){
@@ -69,6 +74,8 @@ int main(){
                     printf("Erro: Este Id já está cadastrado! Tente novamente!\n");
                 }
                 } while(duplicado == 1);
+
+
             do{
             printf("Digite o nome: ");
 
@@ -85,8 +92,7 @@ int main(){
 
             leitura_preco = scanf("%f", &produtos[total].preco);
 
-            int caractere;
-            while((caractere = getchar()) != '\n' && caractere != EOF){};
+            while(getchar()!='\n');
 
             if(leitura_preco != 1){
                 printf("O valor precisa ser do tipo decimal!\n");
@@ -96,20 +102,24 @@ int main(){
 
         }while(leitura_preco != 1 || produtos[total].preco <=0);
         int leitura_qtd;
+        int entrada_invalida_qtd;
         do{
+            entrada_invalida_qtd = 0;
             printf("Digite a quantidade: ");
-            leitura_qtd = scanf("%i", &produtos[total].quantidade);
+            leitura_qtd = scanf("%d", &produtos[total].quantidade);
             int caractere;
-            while((caractere = getchar()) != '\n' && caractere != EOF){};
-
-            if(leitura_qtd != 1){
+            while ((caractere = getchar()) != '\n' && caractere != EOF) {
+                if (caractere != ' ') {
+                    entrada_invalida_qtd = 1;
+                }
+}
+            if (leitura_qtd != 1 || entrada_invalida_qtd == 1) {
                 printf("A quantidade precisa ser do tipo inteiro!\n");
             }else {
                 if(produtos[total].quantidade < 0){
                     printf("A quantidade n~ao pode ser negativa!\n");}
             }
-        }while(leitura_qtd != 1 || produtos[total].quantidade < 0);
-
+        } while (leitura_qtd != 1 || entrada_invalida_qtd == 1 || produtos[total].quantidade < 0);
         printf("================================");
         printf("Produto cadastrado com sucesso!");
         printf("================================");
