@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+
 
 
 int main(){
@@ -80,12 +82,14 @@ int main(){
             printf("Digite o nome: ");
 
             fgets(produtos[total].nome, sizeof(produtos[total].nome),stdin);
+            produtos[total].nome[strcspn(produtos[total].nome, "\n")] = '\0';
 
-            if (produtos[total].nome[0] == '\n' || produtos[total].nome[0] == ' '){
-                printf("Erro! O nome não pode estar vazio!\n");}
+            if (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ') {
+                printf("Erro! O nome não pode estar vazio!\n");
+            }
 
-            } while(produtos[total].nome[0] == '\n' || produtos[total].nome[0] == ' ');
-            
+            } while (produtos[total].nome[0] == '\0' || produtos[total].nome[0] == ' ');            
+        
         int leitura_preco;
         int entrada_invalida_preco;
         do{
