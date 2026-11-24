@@ -187,6 +187,7 @@ int main(){
                 while ((caractere = getchar()) != '\n' && caractere != EOF) {}
             } else {
                     do{
+                        entrada_invalida_busca = 0;
                         printf("Digite o ID do produto: ");
                         leitura_busca = scanf("%d", &id_busca);
                         while ((caractere = getchar()) != '\n' && caractere != EOF) {
@@ -201,7 +202,8 @@ int main(){
                                 printf("Erro! O ID precisa ser positivo!\n");
                                 }
                             }
-                    }
+                    } while (leitura_busca != 1 || entrada_invalida_busca == 1 || id_busca <= 0);
+
                     for (int i = 0; i < total; i++) {
                         if (produtos[i].id_produto == id_busca) {
                             encontrado = 1;
@@ -210,13 +212,16 @@ int main(){
                             printf("Nome: %s\n", produtos[i].nome);
                             printf("Preco: R$ %.2f\n", produtos[i].preco);
                             printf("Quantidade: %d\n", produtos[i].quantidade);
-                            break;}
+                            printf("======================================\n");
+                            break;
+                        }
                     }
                     if (encontrado == 0) {
                         printf("Produto nao encontrado!\n");
                     }
-
-            }   
+            }
+            printf("\nPressione ENTER para voltar ao menu");
+            getchar();
             break;
 
             case 4:
