@@ -177,7 +177,7 @@ int main(){
                         printf("Nome: %s\n", produtos[i].nome);
                         printf("Preco: R$ %.2f\n", produtos[i].preco);
                         printf("Quantidade: %d\n", produtos[i].quantidade);
-                        printf("------------------------------------------------------------------\n");
+                        printf("--------------------------------\n");
                     }
                     printf("Total de produtos: %d\n", total);
                 }   
